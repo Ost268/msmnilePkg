@@ -26,22 +26,27 @@
   KailuaPkg/KailuaPkg.dec
   SurfaceDuoFamilyPkg/SurfaceDuoFamilyPkg.dec
   QcomPkg/QcomPkg.dec
+  QcomModulePkg/QcomModulePkg.dec
 
 [LibraryClasses]
   ArmLib
   ArmMmuLib
   BaseLib
+  ConfigurationMapHelperLib
   DebugLib
   HobLib
   IoLib
   MemoryAllocationLib
-  SerialPortLib
   MemoryMapHelperLib
+  SerialPortLib
+  SecProtocolFinderLib
+
+[Guids]
+  gEfiSchedIntfGuid
+  gEfiSecDtbGuid
 
 [FixedPcd]
   gArmTokenSpaceGuid.PcdFvSize
-  gSurfaceDuoFamilyPkgTokenSpaceGuid.KernelProtocolAddress
-  gSurfaceDuoFamilyPkgTokenSpaceGuid.XBLDTProtocolAddress
 
 [Pcd]
   gArmTokenSpaceGuid.PcdFvBaseAddress

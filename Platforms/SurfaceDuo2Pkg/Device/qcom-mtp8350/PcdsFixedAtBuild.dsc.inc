@@ -3,17 +3,13 @@ gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
 gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferHeight|2340
 
 # Smbios Info
-gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosSystemBrand|"QTI"
-gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosSystemModel|"QTI MTP8350"
-gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"LAHAINA"
-gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosSystemRetailSku|"DVT"
+gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosSystemBrand|"Qualcomm"
+gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosBoardModel|"MTP"
+gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosSystemRetailSku|"6"
 
 # Display Caller
 # gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdDisplayCallerExitDisableDisplay|FALSE
 # gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdDisplayCallerStallBeforeEnable|2000000
-
-# Scheduler Protocol Address
-gSurfaceDuoFamilyPkgTokenSpaceGuid.KernelProtocolAddress|0x9FC37990
 
 [PcdsDynamicDefault.common]
 gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution|1080

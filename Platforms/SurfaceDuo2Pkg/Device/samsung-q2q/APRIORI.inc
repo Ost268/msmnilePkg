@@ -12,7 +12,6 @@ APRIORI DXE {
     # Core Drivers
     INF EmbeddedPkg/MetronomeDxe/MetronomeDxe.inf
     INF ArmPkg/Drivers/TimerDxe/TimerDxe.inf
-    INF ArmPkg/Drivers/ArmPsciMpServicesDxe/ArmPsciMpServicesDxe.inf
     INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Binaries/QcomPkg/Drivers/EnvDxe/EnvDxe.inf
     INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Binaries/QcomPkg/Drivers/SmemDxe/SmemDxe.inf
     INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Binaries/QcomPkg/Drivers/DALSYSDxe/DALSYSDxe.inf
@@ -45,7 +44,11 @@ APRIORI DXE {
             SECTION UI = "DiskIoDxe"
     }
 
-    INF MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
+    FILE DRIVER = 1fa1f39e-feff-4aae-bd7b-38a070a3b609 {
+            SECTION PE32 = $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Binaries/MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.efi
+            SECTION UI = "PartitionDxe"
+    }
+
     INF MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
     INF MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
     INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Binaries/QcomPkg/Drivers/SdccDxe/SdccDxe.inf
@@ -58,12 +61,7 @@ APRIORI DXE {
     }
 
     INF QcomPkg/PatchedBinaries/MsAbstractLayer.inf
-    # INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
-    FILE DRIVER = CBD2E4D5-7068-4FF5-B462-9822B4AD8D60 {
-            SECTION PE32 = SurfaceDuoFamilyPkg/Binaries/VariableRuntimeDxe.efi
-            SECTION DXE_DEPEX_EXP = {gEfiPcdProtocolGuid AND gEfiDevicePathUtilitiesProtocolGuid}
-            SECTION UI = "VariableRuntimeDxe"
-    }
+    INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
     INF QcomPkg/PatchedBinaries/QcomWDogDxe.inf
     INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Binaries/QcomPkg/Drivers/DDRInfoDxe/DDRInfoDxe.inf
     INF $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Binaries/QcomPkg/Drivers/ResetRuntimeDxe/ResetRuntimeDxe.inf
@@ -168,6 +166,10 @@ FILE DRIVER = 2CC73155-A1F9-4C4B-88E2-CAF9390E126A {
     INF MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
     INF MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
 
-    INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
+#    INF MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
+    FILE DRIVER = cccb0c28-4b24-11d5-9a5a-0090273fc14d {
+        SECTION PE32 = $(PACKAGE_NAME)/Device/$(TARGET_DEVICE)/Binaries/MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.efi
+        SECTION UI = "GraphicsConsoleDxe"
+    }
     INF MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
 }

@@ -11,7 +11,7 @@
 
 [PcdsFixedAtBuild.common]
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000         # Starting address
-  gArmTokenSpaceGuid.PcdCpuVectorBaseAddress|0xA7600000
+  gArmTokenSpaceGuid.PcdCpuVectorBaseAddress|0xa7600000
   gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz|19200000
   gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum|29
   gArmTokenSpaceGuid.PcdArmArchTimerIntrNum|30
@@ -20,13 +20,13 @@
   gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase|0x17140000
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x00008550
-  gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0xA760D000
+  gEmbeddedTokenSpaceGuid.PcdPrePiStackBase|0xa760d000
   gEmbeddedTokenSpaceGuid.PcdPrePiStackSize|0x00040000      # 256K stack
   # TODO: Find the PcdInterruptBaseAddress
-  gEmbeddedTokenSpaceGuid.PcdInterruptBaseAddress|0x09BC0000
+  gEmbeddedTokenSpaceGuid.PcdInterruptBaseAddress|0x09bc0000
   gEmbeddedTokenSpaceGuid.PcdPrePiCpuIoSize|44
 
-  gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon (TM) 8 Gen2 @ 3.19 GHz"
+  gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon (TM) 8 Gen 2 @ 3.19 GHz"
   gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosProcessorRetailModel|"SM8550"
 
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000         # 2GB Base
@@ -40,6 +40,11 @@
   # Different Device has different Memory Map.
   # So the define of this Lib is moved to KailuaPkg/Kailua.dsc
   #PlatformMemoryMapLib|QcomPkg/Library/PlatformMemoryMapLib/PlatformMemoryMapLib.inf
+
+  # Different Device has different Configuration Map.
+  # So the define of this Lib is moved to KailuaPkg/Kailua.dsc
+  #PlatformConfigurationMapLib|QcomPkg/Library/PlatformConfigurationMapLib/PlatformConfigurationMapLib.inf
+
   PlatformPeiLib|QcomPkg/PlatformPei/PlatformPeiLib.inf
   PlatformPrePiLib|QcomPkg/Library/PlatformPrePiLib/PlatformPrePiLib.inf
   AslUpdateLib|SurfaceDuoFamilyPkg/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
@@ -48,5 +53,4 @@
   AcpiPlatformUpdateLib|QcomPkg/Library/AcpiPlatformUpdateLib/AcpiPlatformUpdateLib.inf
   PlatformThemeLib|QcomPkg/Library/PlatformThemeLib/PlatformThemeLib.inf
 
-#[Components.common]
-# SurfaceDuoFamilyPkg/Driver/RamPartitionDxe/RamPartitionDxe.inf
+  ConsoleMsgLib|PcBdsPkg/Library/ConsoleMsgLibNull/ConsoleMsgLibNull.inf

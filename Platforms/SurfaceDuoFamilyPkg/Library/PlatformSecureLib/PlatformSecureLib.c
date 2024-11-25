@@ -17,7 +17,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #include <Configuration/BootDevices.h>
 #include <Protocol/SimpleTextInEx.h>
 
-BOOLEAN  mUserPhysicalPresence = FALSE;
+BOOLEAN  mUserPhysicalPresence = TRUE;
 static EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL *SimpleEx = NULL;
 
 EFI_STATUS
@@ -38,18 +38,11 @@ LocateButtonProtocol (
   EFI_HANDLE                         Handle   = NULL;
   EFI_DEVICE_PATH_PROTOCOL          *ButtonsDxeDevicePath;
 
-  DEBUG((DEBUG_ERROR, "%a \n", __FUNCTION__));
-
   ButtonsDxeDevicePath = (EFI_DEVICE_PATH_PROTOCOL *)&KeypadDevicePath;
 
   Status = gBS->LocateDevicePath(
       &gEfiSimpleTextInputExProtocolGuid, &ButtonsDxeDevicePath, &Handle);
   if (EFI_ERROR(Status)) {
-    DEBUG(
-        (DEBUG_ERROR,
-         "Failed to locate ButtonsDxe device path for button service protocol, "
-         "Status = %r.\n",
-         Status));
     return EFI_OUT_OF_RESOURCES;
   }
 
@@ -65,6 +58,8 @@ LocateButtonProtocol (
     return Status;
   }
   
+  mUserPhysicalPresence = FALSE;
+
   return Status;
 }
 

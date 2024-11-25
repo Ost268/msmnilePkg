@@ -22,6 +22,7 @@
   MdeModulePkg/MdeModulePkg.dec
   SurfaceDuoFamilyPkg/SurfaceDuoFamilyPkg.dec
   SurfaceDuo1Pkg/SurfaceDuo1Pkg.dec
+  QcomModulePkg/QcomModulePkg.dec
 
 [Guids]
   gEfiDxeServicesTableGuid
@@ -42,9 +43,11 @@
 
 [Protocols]
   gEfiRamPartitionProtocolGuid
+  gArmPageTableMemoryAllocationProtocolGuid
   
 [Depex]
-  gEfiRamPartitionProtocolGuid
+  gEfiRamPartitionProtocolGuid AND
+  gArmPageTableMemoryAllocationProtocolGuid
 
 #[BuildOptions.AARCH64]
 #  GCC:*_*_*_CC_FLAGS = -Wno-unused-function

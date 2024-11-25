@@ -1,0 +1,8 @@
+[PcdsFixedAtBuild.common]
+gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferWidth|2160
+gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferHeight|3840
+
+# Smbios Info
+gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosSystemBrand|"Qualcomm"
+gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosBoardModel|"MTP"
+gSurfaceDuoFamilyPkgTokenSpaceGuid.PcdSmbiosSystemRetailSku|"6"

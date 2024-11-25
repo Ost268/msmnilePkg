@@ -13,6 +13,7 @@
 #include <Library/HobLib.h>
 #include <Library/MemoryAllocationLib.h>
 #include <Library/PcdLib.h>
+#include <Library/SecProtocolFinderLib.h>
 #include "PlatformPeiLibInternal.h"
 
 STATIC
@@ -47,38 +48,14 @@ STATIC
 EFI_STATUS
 CfgGetCfgInfoVal(CHAR8 *Key, UINT32 *Value)
 {
-  PCONFIGURATION_DESCRIPTOR_EX ConfigurationDescriptorEx =
-      gDeviceConfigurationDescriptorEx;
-
-  // Run through each configuration descriptor
-  while (ConfigurationDescriptorEx->Value != 0xFFFFFFFF) {
-    if (AsciiStriCmp(Key, ConfigurationDescriptorEx->Name) == 0) {
-      *Value = (UINT32)(ConfigurationDescriptorEx->Value & 0xFFFFFFFF);
-      return EFI_SUCCESS;
-    }
-    ConfigurationDescriptorEx++;
-  }
-
-  return EFI_NOT_FOUND;
+  return LocateConfigurationMapUINT32ByName(Key, Value);
 }
 
 STATIC
 EFI_STATUS
 CfgGetCfgInfoVal64(CHAR8 *Key, UINT64 *Value)
 {
-  PCONFIGURATION_DESCRIPTOR_EX ConfigurationDescriptorEx =
-      gDeviceConfigurationDescriptorEx;
-
-  // Run through each configuration descriptor
-  while (ConfigurationDescriptorEx->Value != 0xFFFFFFFF) {
-    if (AsciiStriCmp(Key, ConfigurationDescriptorEx->Name) == 0) {
-      *Value = ConfigurationDescriptorEx->Value;
-      return EFI_SUCCESS;
-    }
-    ConfigurationDescriptorEx++;
-  }
-
-  return EFI_NOT_FOUND;
+  return LocateConfigurationMapUINT64ByName(Key, Value);
 }
 
 STATIC
@@ -155,7 +132,6 @@ VOID BuildMemHobForFv(IN UINT16 Type)
 }
 
 STATIC GUID gEfiInfoBlkHobGuid   = EFI_INFORMATION_BLOCK_GUID;
-STATIC GUID gEfiSchedIntfGuid    = EFI_SCHED_INTF_GUID;
 STATIC GUID gEfiShLibHobGuid     = EFI_SHIM_LIBRARY_GUID;
 STATIC GUID gFvDecompressHobGuid = EFI_FV_DECOMPRESS_GUID;
 
@@ -167,10 +143,14 @@ VOID InstallPlatformHob()
     ARM_MEMORY_REGION_DESCRIPTOR_EX InfoBlk;
     LocateMemoryMapAreaByName("Info Blk", &InfoBlk);
 
+    UINTN XBL_UEFI_FD = 0x9FC00000;
+
     UINTN InfoBlkAddress      = InfoBlk.Address;
+    UINTN SchedIntfAddress    = 0;
     UINTN ShLibAddress        = (UINTN)&ShLib;
-    UINTN FvDecompressAddress = 0x9D542000;
-    UINTN SchedIntfAddress    = PcdGet64(KernelProtocolAddress);
+    UINTN FvDecompressAddress = XBL_UEFI_FD + 0x403C8;
+
+    InitProtocolFinder(&SchedIntfAddress, NULL);
 
     BuildMemHobForFv(EFI_HOB_TYPE_FV2);
     BuildGuidDataHob(
